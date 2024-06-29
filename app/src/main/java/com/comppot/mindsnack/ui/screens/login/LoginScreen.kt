@@ -1,24 +1,47 @@
 package com.comppot.mindsnack.ui.screens.login
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import android.app.Activity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
+import androidx.compose.runtime.LaunchedEffect
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.comppot.mindsnack.ui.navigation.Screen
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 
 @Composable
-fun LoginScreen(navController: NavHostController) {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Button(onClick = {
-            navController.navigate(Screen.Tab.route) {
-                popUpTo(Screen.Login.route) { inclusive = true }
+fun LoginScreen(navController: NavController, viewModel: LoginViewModel = viewModel()) {
+    FirebaseLoginUI { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            viewModel.onSignedIn {
+                navController.navigate(Screen.Tab.route) {
+                    popUpTo(Screen.Login.route) { inclusive = true }
+                }
             }
-        }) {
-            Text("Login")
         }
+    }
+}
+
+@Composable
+private fun FirebaseLoginUI(onLoginResult: (FirebaseAuthUIAuthenticationResult) -> Unit) {
+    val launcher = rememberLauncherForActivityResult(
+        contract = FirebaseAuthUIActivityResultContract(),
+        onResult = onLoginResult
+    )
+
+    val providers = arrayListOf(
+        AuthUI.IdpConfig.GoogleBuilder().build(),
+        AuthUI.IdpConfig.EmailBuilder().build(),
+    )
+
+    val intent = AuthUI.getInstance()
+        .createSignInIntentBuilder()
+        .setAvailableProviders(providers)
+        .build()
+
+    LaunchedEffect(true) {
+        launcher.launch(intent)
     }
 }

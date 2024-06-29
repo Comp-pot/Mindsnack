@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "432884314904",
+    "project_id": "mindsnack-4f28d",
+    "storage_bucket": "mindsnack-4f28d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432884314904:android:6ab3c0575357e38992246d",
+        "android_client_info": {
+          "package_name": "com.comppot.mindsnack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432884314904-bikm9bl2gkgjgt4af3mgm542gh8ubtnl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.comppot.mindsnack",
+            "certificate_hash": "9ecbe58c4eb18e6437c4a5287cbf3c56423b0186"
+          }
+        },
+        {
+          "client_id": "432884314904-phis8gvdn88kpva3gpq83kvjdo09f9ht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuCHJSzgk4Shiv5Zij8thlYGUfctZ7rmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432884314904-phis8gvdn88kpva3gpq83kvjdo09f9ht.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
