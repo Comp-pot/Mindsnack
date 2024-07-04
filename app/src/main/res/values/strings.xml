@@ -9,4 +9,6 @@
     <string name="icon_back">Back</string>
     <string name="icon_save">Save</string>
     <string name="icon_share">Share</string>
+
+    <string name="article_card_info">%1$s - %2$d min read</string>
 </resources>

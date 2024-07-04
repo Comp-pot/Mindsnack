@@ -8,8 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.comppot.mindsnack.ui.screens.article.ArticleScreen
 import com.comppot.mindsnack.ui.screens.login.LoginScreen
-import com.comppot.mindsnack.ui.screens.tab.BaseTabScreen
 import com.comppot.mindsnack.ui.screens.notifications.NotificationsScreen
+import com.comppot.mindsnack.ui.screens.tab.BaseTabScreen
 
 const val ARTICLE_ID = "articleId"
 
@@ -17,7 +17,7 @@ const val ARTICLE_ID = "articleId"
 fun MainNavGraph(navController: NavHostController, startDestination: Screen) {
     NavHost(
         navController = navController,
-        startDestination = startDestination.route,
+        startDestination = startDestination.route
     ) {
         composable(route = Screen.Login.route) { LoginScreen(navController) }
         composable(route = Screen.Tab.route) { BaseTabScreen(navController) }

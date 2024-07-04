@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.comppot.mindsnack.ui.navigation.Screen
 import com.comppot.mindsnack.ui.components.TabBottomBar
 import com.comppot.mindsnack.ui.components.TabTopBar
+import com.comppot.mindsnack.ui.navigation.Screen
 import com.comppot.mindsnack.ui.navigation.TabNavGraph
 
 @Composable
