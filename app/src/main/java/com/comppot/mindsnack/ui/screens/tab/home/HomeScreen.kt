@@ -1,6 +1,5 @@
 package com.comppot.mindsnack.ui.screens.tab.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,8 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -35,11 +32,7 @@ fun HomeScreen(openArticle: (Long) -> Unit = {}) {
         Category(4, "Space"),
         Category(5, "Movies")
     )
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp))
-    ) {
+    Column(modifier = Modifier.fillMaxSize()) {
         CategoryList(categoryList)
         ArticleList(articleList, openArticle)
     }
@@ -70,7 +63,7 @@ private fun ArticleList(articleList: List<Article>, openArticle: (Long) -> Unit)
     }
 }
 
-@Preview(showSystemUi = true)
+@Preview
 @Composable
 private fun HomeScreenPreview() {
     HomeScreen()

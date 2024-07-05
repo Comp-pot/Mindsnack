@@ -24,7 +24,7 @@ fun TabNavGraph(
     ) {
         composable(Screen.Tab.Home.route) { HomeScreen(openArticle) }
         composable(Screen.Tab.Search.route) { SearchScreen() }
-        composable(Screen.Tab.Saved.route) { SavedScreen() }
+        composable(Screen.Tab.Saved.route) { SavedScreen(openArticle) }
         composable(Screen.Tab.Profile.route) { ProfileScreen(logout) }
     }
 }
