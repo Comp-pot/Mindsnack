@@ -23,7 +23,7 @@ fun TabNavGraph(
         modifier = modifier
     ) {
         composable(Screen.Tab.Home.route) { HomeScreen(openArticle) }
-        composable(Screen.Tab.Search.route) { SearchScreen() }
+        composable(Screen.Tab.Search.route) { SearchScreen(openArticle) }
         composable(Screen.Tab.Saved.route) { SavedScreen(openArticle) }
         composable(Screen.Tab.Profile.route) { ProfileScreen(logout) }
     }
