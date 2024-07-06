@@ -1,6 +1,8 @@
 package com.comppot.mindsnack.ui.components
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -23,6 +25,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,7 +56,7 @@ fun TabBottomBar(bottomNavController: NavHostController) {
         NavigationItem(Screen.Tab.Profile, R.string.screen_profile, Icons.Filled.Person, Icons.Outlined.Person)
     )
 
-    NavigationBar(tonalElevation = 0.dp){
+    NavigationBar(tonalElevation = 0.dp) {
         val navBackStackEntry by bottomNavController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
@@ -84,7 +91,10 @@ fun TabBottomBar(bottomNavController: NavHostController) {
 }
 
 @Composable
-fun ArticleBottomBar(navigateUp: () -> Unit = {}) {
+fun ArticleBottomBar(initialSavedCount: Int, navigateUp: () -> Unit = {}) {
+    var savedCount by remember { mutableIntStateOf(initialSavedCount) }
+    var isSaved by remember { mutableStateOf(false) }
+
     NavigationBar(tonalElevation = 0.dp) {
         BottomToolbarItem(onClick = navigateUp) {
             Icon(
@@ -92,11 +102,11 @@ fun ArticleBottomBar(navigateUp: () -> Unit = {}) {
                 contentDescription = stringResource(id = R.string.icon_back)
             )
         }
-        BottomToolbarItem {
-            Icon(
-                Icons.Outlined.BookmarkBorder,
-                contentDescription = stringResource(id = R.string.icon_save),
-            )
+        BottomToolbarItem({
+            isSaved = !isSaved
+            savedCount = initialSavedCount + if (isSaved) 1 else 0
+        }) {
+            SaveArticleIcon(isSaved, savedCount)
         }
         BottomToolbarItem {
             Icon(
@@ -104,6 +114,20 @@ fun ArticleBottomBar(navigateUp: () -> Unit = {}) {
                 contentDescription = stringResource(id = R.string.icon_share),
             )
         }
+    }
+}
+
+@Composable
+private fun SaveArticleIcon(isSaved: Boolean, savedCount: Int) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            if (isSaved) Icons.Default.Bookmark else Icons.Outlined.BookmarkBorder,
+            contentDescription = stringResource(id = R.string.icon_save)
+        )
+        Text("$savedCount", style = MaterialTheme.typography.titleLarge)
     }
 }
 
@@ -129,5 +153,5 @@ private fun TabBottomBarPreview() {
 @Preview
 @Composable
 private fun ArticleBottomBarPreview() {
-    ArticleBottomBar()
+    ArticleBottomBar(0)
 }

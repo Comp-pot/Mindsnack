@@ -1,5 +1,6 @@
 package com.comppot.mindsnack.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -8,13 +9,16 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -24,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.comppot.mindsnack.R
 import com.comppot.mindsnack.model.Article
+import com.comppot.mindsnack.model.ArticleDetails
 import com.comppot.mindsnack.ui.utils.DateUtils
 
 @Composable
@@ -44,8 +49,8 @@ fun ArticleCard(
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                TitleText(article.title, MaterialTheme.typography.titleMedium)
-                DetailsText(article.postDate, article.readTime)
+                PreviewTitleText(article.title, MaterialTheme.typography.titleMedium)
+                DetailsText(article.postDate, article.readTime, MaterialTheme.typography.bodySmall)
             }
             ArticleImage(
                 imageUrl = article.image,
@@ -75,7 +80,7 @@ fun SavedArticleCard(
                     .fillMaxWidth()
                     .height(100.dp),
             )
-            TitleText(
+            PreviewTitleText(
                 article.title,
                 MaterialTheme.typography.titleSmall,
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 16.dp)
@@ -85,7 +90,38 @@ fun SavedArticleCard(
 }
 
 @Composable
-private fun TitleText(title: String, style: TextStyle, modifier: Modifier = Modifier) {
+fun ArticleDetailsHeader(articleDetails: ArticleDetails, modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
+        ) {
+            Text(
+                articleDetails.title,
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+            DetailsText(
+                articleDetails.postDate,
+                articleDetails.readTime,
+                MaterialTheme.typography.bodyMedium
+            )
+        }
+        ArticleImage(
+            articleDetails.image,
+            modifier = Modifier
+                .size(width = 150.dp, height = 190.dp)
+                .clip(MaterialTheme.shapes.medium)
+        )
+    }
+}
+
+@Composable
+private fun PreviewTitleText(title: String, style: TextStyle, modifier: Modifier = Modifier) {
     Text(
         title,
         style = style,
@@ -97,14 +133,14 @@ private fun TitleText(title: String, style: TextStyle, modifier: Modifier = Modi
 }
 
 @Composable
-private fun DetailsText(postDate: Long, readTime: Int) {
+private fun DetailsText(postDate: Long, readTime: Int, style: TextStyle) {
     Text(
         stringResource(
             id = R.string.article_card_info,
             DateUtils.formatDate(postDate),
             readTime
         ),
-        style = MaterialTheme.typography.bodySmall,
+        style = style,
         color = MaterialTheme.colorScheme.onSurfaceVariant
     )
 }
@@ -133,3 +169,15 @@ private fun SavedArticleCardPreview() {
     SavedArticleCard(article, modifier = Modifier.width(200.dp))
 }
 
+@Preview
+@Composable
+private fun ArticleDetailsHeaderPreview() {
+    val article = ArticleDetails(1, "", "How to make beautiful design using physics", 1716226826, 5)
+    ArticleDetailsHeader(
+        article,
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.background)
+            .fillMaxWidth()
+            .padding(16.dp)
+    )
+}
