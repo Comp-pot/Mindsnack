@@ -14,7 +14,6 @@ import com.comppot.mindsnack.ui.screens.tab.search.SearchScreen
 fun TabNavGraph(
     navController: NavHostController,
     openArticle: (Long) -> Unit,
-    logout: () -> Unit,
     modifier: Modifier
 ) {
     NavHost(
@@ -25,6 +24,6 @@ fun TabNavGraph(
         composable(Screen.Tab.Home.route) { HomeScreen(openArticle) }
         composable(Screen.Tab.Search.route) { SearchScreen(openArticle) }
         composable(Screen.Tab.Saved.route) { SavedScreen(openArticle) }
-        composable(Screen.Tab.Profile.route) { ProfileScreen(logout) }
+        composable(Screen.Tab.Profile.route) { ProfileScreen() }
     }
 }

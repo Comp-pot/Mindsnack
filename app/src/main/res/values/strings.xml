@@ -11,8 +11,21 @@
     <string name="icon_share">Share</string>
     <string name="icon_search">Search</string>
     <string name="icon_clear">Clear</string>
+    <string name="icon_edit">Edit</string>
+    <string name="icon_more">More</string>
+    <string name="menu_item_logout">Logout</string>
 
     <string name="article_card_info">%1$s - %2$d min read</string>
 
     <string name="search_bar_placeholder">Search…</string>
+
+    <string name="profile_settings_full_name">Full name</string>
+    <string name="profile_settings_dark_theme">Dark Theme</string>
+    <string name="profile_settings_notifications">Notifications</string>
+
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_save">Save</string>
+    <string name="dialog_edit_name_title">Edit your name</string>
+    <string name="dialog_edit_name_first">First name</string>
+    <string name="dialog_edit_name_last">Last name</string>
 </resources>
