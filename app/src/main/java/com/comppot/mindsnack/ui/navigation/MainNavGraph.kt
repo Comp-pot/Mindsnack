@@ -1,6 +1,10 @@
 package com.comppot.mindsnack.ui.navigation
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -17,7 +21,10 @@ const val ARTICLE_ID = "articleId"
 fun MainNavGraph(navController: NavHostController, startDestination: Screen) {
     NavHost(
         navController = navController,
-        startDestination = startDestination.route
+        startDestination = startDestination.route,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
     ) {
         composable(route = Screen.Login.route) { LoginScreen(navController) }
         composable(route = Screen.Tab.route) { BaseTabScreen(navController) }

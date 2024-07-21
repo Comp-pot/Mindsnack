@@ -3,8 +3,8 @@ package com.comppot.mindsnack.ui.screens.tab.search
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -20,8 +20,15 @@ import com.comppot.mindsnack.ui.components.ArticleSearchBar
 fun SearchScreen(openArticle: (Long) -> Unit = {}) {
     val articleList = List(7) { index -> exampleArticle(id = index) }
 
-    Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
-        ArticleSearchBar()
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        ArticleSearchBar(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+        )
         ArticleList(articleList = articleList, openArticle)
     }
 }

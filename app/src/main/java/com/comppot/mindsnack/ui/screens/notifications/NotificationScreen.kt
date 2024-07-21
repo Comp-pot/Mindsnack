@@ -44,16 +44,26 @@ fun NotificationsScreen(navigateUp: () -> Unit = {}) {
 private fun NotificationList(notificationList: List<Notification>, modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier) {
         items(notificationList) {
-            NotificationItem(it, modifier = Modifier.fillMaxWidth())
+            NotificationItem(
+                it, modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 2.dp)
+            )
         }
     }
 }
 
 @Composable
 private fun NotificationItem(notification: Notification, modifier: Modifier = Modifier) {
+    val backgroundColor = if (notification.wasRead) {
+        MaterialTheme.colorScheme.surface
+    } else {
+        MaterialTheme.colorScheme.primaryContainer
+    }
+
     Row(
         modifier = modifier
-            .background(MaterialTheme.colorScheme.primaryContainer.takeColorIf(!notification.wasRead))
+            .background(backgroundColor)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp)

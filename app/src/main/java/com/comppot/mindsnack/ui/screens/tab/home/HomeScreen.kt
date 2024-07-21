@@ -32,7 +32,7 @@ fun HomeScreen(openArticle: (Long) -> Unit = {}) {
         Category(4, "Space"),
         Category(5, "Movies")
     )
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column {
         CategoryList(categoryList)
         ArticleList(articleList, openArticle)
     }

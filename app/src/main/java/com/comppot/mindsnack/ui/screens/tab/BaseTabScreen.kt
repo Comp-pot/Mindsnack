@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.comppot.mindsnack.ui.components.TabBottomBar
@@ -30,7 +31,10 @@ fun BaseTabScreen(navController: NavHostController) {
         TabNavGraph(
             bottomNavController,
             openArticle = { navController.navigate("${Screen.Article.route}/$it") },
-            modifier = Modifier.fillMaxSize().padding(innerPadding)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(bottom = 2.dp)
         )
     }
 }

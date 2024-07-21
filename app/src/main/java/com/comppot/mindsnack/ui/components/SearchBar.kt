@@ -17,13 +17,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.comppot.mindsnack.R
 
 @Composable
-fun ArticleSearchBar() {
+fun ArticleSearchBar(modifier: Modifier = Modifier) {
     val focusManager = LocalFocusManager.current
     var text by rememberSaveable { mutableStateOf("") }
 
@@ -42,6 +43,7 @@ fun ArticleSearchBar() {
         },
         colors = SearchBarDefaults.colors(containerColor = MaterialTheme.colorScheme.surface),
         tonalElevation = 0.dp,
+        modifier = modifier
     ) {}
 }
 

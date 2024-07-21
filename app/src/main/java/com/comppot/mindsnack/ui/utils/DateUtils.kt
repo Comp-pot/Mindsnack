@@ -10,7 +10,7 @@ object DateUtils {
     private const val DATE_FORMAT = "MMM d"
 
     fun formatDate(timestamp: Long): String {
-        val formatter = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        val formatter = SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH)
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = timestamp * 1000
         return formatter.format(calendar.time)
