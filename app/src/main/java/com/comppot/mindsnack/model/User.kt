@@ -1,16 +1,20 @@
 package com.comppot.mindsnack.model
 
+import com.google.firebase.auth.FirebaseUser
+
 
 data class User(
-    val firstName: String,
-    val lastName: String,
-    val image: String,
+    val fullName: String = "",
+    val image: String = "",
     val preferences: UserPreferences = UserPreferences()
-) {
-    val fullName: String get() = "$firstName $lastName"
-}
+)
 
 data class UserPreferences(
     val darkTheme: Boolean = false,
     val notifications: Boolean = true
+)
+
+fun FirebaseUser.toUser() = User(
+    fullName = displayName.orEmpty(),
+    image = photoUrl.toString()
 )

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,14 +35,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.comppot.mindsnack.R
 import com.comppot.mindsnack.model.User
-import com.comppot.mindsnack.ui.components.EditNameDialog
 
 @Composable
-fun ProfileScreen() {
-    val user = exampleUser()
+fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
+    val user by viewModel.currentUser.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
 
     Column(
@@ -54,13 +54,14 @@ fun ProfileScreen() {
         SettingsCard(user = user, onEditName = { showDialog = true })
     }
 
+    /*
     if (showDialog) {
         EditNameDialog(
             initialFirstName = user.firstName,
             initialLastName = user.lastName,
             onDismiss = { showDialog = false }
         )
-    }
+    }*/
 }
 
 @Composable
@@ -75,11 +76,11 @@ private fun UserImage(imageUrl: String) {
                 .background(MaterialTheme.colorScheme.outlineVariant),
             contentScale = ContentScale.Crop
         )
-        EditIconButton(
+        /*EditIconButton(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .absoluteOffset(x = 15.dp, y = 15.dp)
-        )
+        )*/
     }
 }
 
@@ -168,9 +169,3 @@ private fun CardDivider() {
 private fun ProfileScreenPreview() {
     ProfileScreen()
 }
-
-private fun exampleUser() = User(
-    "Isaak",
-    "Newton",
-    "https://hips.hearstapps.com/hmg-prod/images/isaac_newton_1689_painting_sir_godfrey_kneller_public_domain_via_wikimedia_commons.jpg"
-)
