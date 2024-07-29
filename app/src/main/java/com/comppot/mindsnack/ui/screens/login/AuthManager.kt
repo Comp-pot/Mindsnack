@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 
-class LoginViewModel : ViewModel() {
-    private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+object AuthManager {
+    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val authUI: AuthUI = AuthUI.getInstance()
 
     fun isAuthorized() = firebaseAuth.currentUser != null
 
@@ -16,15 +17,13 @@ class LoginViewModel : ViewModel() {
             AuthUI.IdpConfig.GoogleBuilder().build(),
             AuthUI.IdpConfig.EmailBuilder().build(),
         )
-        return AuthUI.getInstance()
-            .createSignInIntentBuilder()
+        return authUI.createSignInIntentBuilder()
             .setAvailableProviders(providers)
             .build()
     }
 
     fun onSignedOut(context: Context, onComplete: () -> Unit) {
-        AuthUI.getInstance()
-            .signOut(context)
+        authUI.signOut(context)
             .addOnCompleteListener {
                 onComplete()
             }
