@@ -10,6 +10,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import com.comppot.mindsnack.ui.screens.article.ArticleScreen
 import com.comppot.mindsnack.ui.screens.login.LoginScreen
 import com.comppot.mindsnack.ui.screens.notifications.NotificationsScreen
@@ -30,7 +31,10 @@ fun MainNavGraph(navController: NavHostController, startDestination: Screen, onL
         composable(route = Screen.Tab.route) { BaseTabScreen(navController, onLogout) }
         composable(
             route = Screen.Article.route + "/{$ARTICLE_ID}",
-            arguments = listOf(navArgument(ARTICLE_ID) { type = NavType.LongType })
+            arguments = listOf(navArgument(ARTICLE_ID) { type = NavType.LongType }),
+            deepLinks = listOf(
+                navDeepLink { uriPattern = "https://comppot.com/article/{$ARTICLE_ID}" }
+            )
         ) { backStackEntry ->
             val arguments = requireNotNull(backStackEntry.arguments)
             val articleId = arguments.getLong(ARTICLE_ID)

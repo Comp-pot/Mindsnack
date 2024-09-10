@@ -1,5 +1,7 @@
 package com.comppot.mindsnack.ui.screens.article
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
@@ -71,7 +73,7 @@ fun ArticleScreen(
                 isSaved = state.isSaved,
                 savedCount = state.savedCount,
                 onSavedClick = viewModel::updateSave,
-                onShareClick = showNotImplemented,
+                onShareClick = {shareLink(context, "https://comppot.com/article/$articleId")},
                 navigateUp = navigateUp
             )
         },
@@ -173,4 +175,14 @@ private fun ArticleScreenPreview() {
     MindSnackTheme {
         ArticleScreen(1)
     }
+}
+
+fun shareLink(context: Context, link: String) {
+    val sendIntent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_TEXT, link)
+        type = "text/plain"
+    }
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    context.startActivity(shareIntent)
 }

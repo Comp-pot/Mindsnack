@@ -1,6 +1,7 @@
 package com.comppot.mindsnack.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -11,9 +12,9 @@ import com.comppot.mindsnack.ui.navigation.Screen
 import com.comppot.mindsnack.ui.theme.MindSnackTheme
 
 @Composable
-fun MindSnackApp() {
+fun MindSnackApp(navController: NavHostController) {
     val context = LocalContext.current
-    val navController = rememberNavController()
+
 
     val viewModel: AppViewModel = hiltViewModel()
     val state = viewModel.appState.collectAsState().value
