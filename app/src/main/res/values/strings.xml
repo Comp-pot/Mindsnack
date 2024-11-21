@@ -29,6 +29,9 @@
     <string name="search_screen_suggestion_succes">Дякуємо! Ваш запит прийнято</string>
     <string name="search_bar_placeholder">Шукати…</string>
 
+    <string name="saved_screen_tab_cards">Карточки</string>
+    <string name="saved_screen_tab_articles">Статті</string>
+    <string name="saved_screen_no_cards">Ще немає збережених карток</string>
     <string name="saved_screen_no_articles">Ще немає збережених статей</string>
 
     <string name="profile_settings_full_name">Ваше ім\'я</string>

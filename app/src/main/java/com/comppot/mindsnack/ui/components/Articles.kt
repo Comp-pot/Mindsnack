@@ -66,10 +66,10 @@ fun ArticleItem(
 fun SavedArticleItem(
     article: Article,
     modifier: Modifier = Modifier,
-    openArticle: (Long) -> Unit = {}
+    onClick: () -> Unit = {}
 ) {
     Card(
-        onClick = { openArticle(article.id) },
+        onClick = onClick,
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {

@@ -17,3 +17,8 @@ data class CardInfo(
     val title: String?,
     val text: String
 )
+
+data class SavedCard(
+    val articleId: Long,
+    val card: CardInfo
+)
